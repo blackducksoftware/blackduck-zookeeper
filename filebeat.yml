@@ -1,0 +1,15 @@
+## Hub Zookeeper Filebeat Configuration
+
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /opt/blackduck/zookeeper/logs/*
+  fields:
+    application: hub-zookeeper
+  fields_under_root: true
+
+output.logstash:
+  hosts: ["${HUB_LOGSTASH_HOST:logstash}:${HUB_LOGSTASH_PORT:5044}"]
+  index: filebeat
+
+logging.level: info
